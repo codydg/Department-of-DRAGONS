@@ -21,13 +21,20 @@ public class MyProgram extends ConsoleProgram
     private static final int MAX_PLAYERS = 8;
     private static final int MIN_PLAYERS = 2;
     private static final int MAX_MONSTERS = 8;
-    private static final int MIN_MONSTERS = 2;
+    private static final int MIN_MONSTERS_EASY = 2;
+    private static final int MIN_MONSTERS_HARD = 4;
 
     private GameMode mode;
+    private Difficulty difficulty;
 
-    enum GameMode {
+    private enum GameMode {
         FREE_FOR_ALL,
         COOP
+    }
+
+    public enum Difficulty {
+        EASY,
+        HARD
     }
 
     public void run() throws Exception {
@@ -40,6 +47,17 @@ public class MyProgram extends ConsoleProgram
                 break;
             case 2:
                 mode = GameMode.COOP;
+                break;
+        }
+
+        // Set Monster Difficulty
+        System.out.println("Monster Difficulty");
+        switch (readOption(Arrays.asList("Easy", "Hard"))) {
+            case 1:
+                difficulty = Difficulty.EASY;
+                break;
+            case 2:
+                difficulty = Difficulty.HARD;
                 break;
         }
 
@@ -214,12 +232,12 @@ public class MyProgram extends ConsoleProgram
             System.out.println("Player " + (i + 1));
             System.out.println("What class would you like to play as?");
             int characterType = readOption(Arrays.asList("Mage", "Archer"));
-            
+
             String username = "";
             while (username.length() == 0) {
                 username = readLine("What is your username? ").trim();
             }
-            
+
             Player newCharacter;
             switch (characterType) {
             case 1:
@@ -232,15 +250,16 @@ public class MyProgram extends ConsoleProgram
                 System.out.println("Invalid selection made!");
                 newCharacter = null;
             }
-            
+
             characters.add(newCharacter);
         }
 
         // Ask for amount of monsters
         int numberOfMonsters;
+        int minMonsters = (difficulty == Difficulty.EASY) ? MIN_MONSTERS_EASY : MIN_MONSTERS_HARD;
         do {
-            numberOfMonsters = readInt("Choose how many Monsters (" + MIN_MONSTERS + "-" + MAX_MONSTERS + "): ");
-        } while (numberOfMonsters < MIN_MONSTERS || numberOfMonsters > MAX_MONSTERS);
+            numberOfMonsters = readInt("Choose how many Monsters (" + minMonsters + "-" + MAX_MONSTERS + "): ");
+        } while (numberOfMonsters < minMonsters || numberOfMonsters > MAX_MONSTERS);
 
         // Create Monsters
         boolean randomize = false;
@@ -259,10 +278,10 @@ public class MyProgram extends ConsoleProgram
             Monster newCharacter;
             switch (characterType) {
                 case 1:
-                    newCharacter = new Dragon();
+                    newCharacter = new Dragon(difficulty);
                     break;
                 case 2:
-                    newCharacter = new RatMischief();
+                    newCharacter = new RatMischief(difficulty);
                     break;
                 default:
                     System.out.println("Invalid selection made!");

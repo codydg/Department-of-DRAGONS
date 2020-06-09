@@ -1,5 +1,7 @@
 package com.example.consoleprogram.characters;
 
+import com.example.consoleprogram.game.MyProgram;
+
 public class RatMischief extends Monster {
     static final private double RECRUIT_HEALTH_GAIN = 0.4;
     static final private int BASE_RAT_QUANTITY = 200;
@@ -8,8 +10,9 @@ public class RatMischief extends Monster {
 
     private int numRats = BASE_RAT_QUANTITY;
 
-    public RatMischief() {
-        super("Rat Mischief " + (++numRatMischiefs));
+    public RatMischief(MyProgram.Difficulty difficulty) {
+        super("Rat Mischief " + (++numRatMischiefs), difficulty);
+        updateRatsAndEvasion();
     }
 
     private enum Attack {

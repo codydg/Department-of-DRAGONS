@@ -1,10 +1,12 @@
 package com.example.consoleprogram.characters;
 
+import com.example.consoleprogram.game.MyProgram;
+
 public class Dragon extends Monster {
     static private int numDragons = 0;
 
-    public Dragon() {
-        super("Dragon " + (++numDragons));
+    public Dragon(MyProgram.Difficulty difficulty) {
+        super("Dragon " + (++numDragons), difficulty);
     }
     
     public String getDescription()
@@ -18,16 +20,17 @@ public class Dragon extends Monster {
         String attackName;
         int damageDealt;
 
+        boolean isEasy = difficulty == MyProgram.Difficulty.EASY;
         int attackDecider = rand.nextInt(100);
-        if (attackDecider < 15) {
+        if (attackDecider < (isEasy ? 15 : 30)) {
             attackName = "Breath Fire";
-            damageDealt = 50;
-        } else if (attackDecider < 60) {
+            damageDealt = isEasy ? 50 : 80;
+        } else if (attackDecider < (isEasy ? 60 : 80)) {
             attackName = "Claw Slash";
-            damageDealt = 15;
+            damageDealt = isEasy ? 15 : 30;
         } else {
             attackName = "Bite";
-            damageDealt = 5;
+            damageDealt = isEasy ? 5 : 10;
         }
 
         System.out.println(username + " used " + attackName + " on " + target.username + " for " + damageDealt + " damage!");
