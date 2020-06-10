@@ -30,10 +30,12 @@ public class Archer extends Player
         // Shoot arrow
         numberOfArrows--;
         boolean hitTarget = true;
+        // Determine if attack misses from accuracy
         if (rand.nextInt(4) == 0)
         {
             hitTarget = false;
         }
+        // Determine if target evades attack
         if (rand.nextInt(100) < target.evasion)
         {
             hitTarget = false;

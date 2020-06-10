@@ -51,4 +51,8 @@ public abstract class Player extends Character {
             health = maxHealth;
         }
     }
+
+    public void pass() {
+        System.out.println(this + " chose to skip their turn.");
+    }
 }

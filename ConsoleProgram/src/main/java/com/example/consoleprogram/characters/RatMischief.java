@@ -15,6 +15,13 @@ public class RatMischief extends Monster {
         updateRatsAndEvasion();
     }
 
+    public String getDescription()
+    {
+        return super.getDescription() +
+                "Number of Rats: " + numRats +
+                "\nEvasion: " + evasion;
+    }
+
     private enum Attack {
         SWARM,
         BITE,

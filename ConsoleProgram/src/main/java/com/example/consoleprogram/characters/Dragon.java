@@ -8,12 +8,6 @@ public class Dragon extends Monster {
     public Dragon(MyProgram.Difficulty difficulty) {
         super("Dragon " + (++numDragons), difficulty);
     }
-    
-    public String getDescription()
-    {
-        return super.getDescription() +
-            "Monster: Dragon\n";
-    }
 
     @Override
     public void attack(Character target) {

@@ -7,6 +7,7 @@ import com.example.consoleprogram.characters.Character;
 import com.example.consoleprogram.characters.Monster;
 import com.example.consoleprogram.characters.Player;
 import com.example.consoleprogram.characters.RatMischief;
+import com.example.consoleprogram.characters.Spearman;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -176,7 +177,7 @@ public class MyProgram extends ConsoleProgram
                 break;
             case 3:
                 // Pass
-                System.out.println(player + " chose to skip their turn.");
+                player.pass();
                 break;
             case 4:
                 // Surrender
@@ -191,7 +192,7 @@ public class MyProgram extends ConsoleProgram
         }
     }
 
-    private int readOption(List<String> options) {
+    public static int readOption(List<String> options) {
         // Print all of the users options
         int optionNumber = 1;
         for (String option : options) {
@@ -231,7 +232,7 @@ public class MyProgram extends ConsoleProgram
         for (int i = 0; i < numberOfPlayers; i++) {
             System.out.println("Player " + (i + 1));
             System.out.println("What class would you like to play as?");
-            int characterType = readOption(Arrays.asList("Mage", "Archer"));
+            int characterType = readOption(Arrays.asList("Mage", "Archer", "Spearman"));
 
             String username = "";
             while (username.length() == 0) {
@@ -245,6 +246,9 @@ public class MyProgram extends ConsoleProgram
                 break;
             case 2:
                 newCharacter = new Archer(username);
+                break;
+            case 3:
+                newCharacter = new Spearman(username);
                 break;
             default:
                 System.out.println("Invalid selection made!");

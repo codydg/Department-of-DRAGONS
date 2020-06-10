@@ -4,17 +4,18 @@ import java.util.*;
 
 public class ConsoleProgram{
 
-    private Scanner scanner;
+    private static Scanner scanner;
 
     public static void main(String[] args) throws Exception {
+        scanner = new Scanner(System.in);
         new MyProgram().run();
     }
 
     public ConsoleProgram(){
-        scanner = new Scanner(System.in);
+
     }
 
-    public String readLine(String prompt){
+    public static String readLine(String prompt){
         if (prompt.length() != 0) {
             System.out.println(prompt);
         }
