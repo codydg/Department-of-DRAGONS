@@ -6,12 +6,10 @@ public class RatMischief extends Monster {
     static final private double RECRUIT_HEALTH_GAIN = 0.4;
     static final private int BASE_RAT_QUANTITY = 200;
 
-    static private int numRatMischiefs = 0;
-
     private int numRats = BASE_RAT_QUANTITY;
 
     public RatMischief(MyProgram.Difficulty difficulty) {
-        super("Rat Mischief " + (++numRatMischiefs), difficulty);
+        super("Rat Mischief", difficulty);
         updateRatsAndEvasion();
     }
 
@@ -85,6 +83,12 @@ public class RatMischief extends Monster {
                 System.out.println(username + " is recruiting more rats.");
                 recruit();
                 return;
+        }
+
+        // Archers may fire skunk arrows to avoid RatMischiefs' attacks
+        if (target instanceof Archer && rand.nextInt(100) < 8) {
+            System.out.println(target.username + " fired a skunk arrow to avoid " + username + "'s attack!");
+            return;
         }
 
         int damage = (int)damageDealt;

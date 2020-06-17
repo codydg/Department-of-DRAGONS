@@ -27,13 +27,21 @@ public class Mage extends Player
             damageDealt = 50;
         }
         
-        System.out.println(username + " fireballed " + target.username + " for " + damageDealt + " damage!");
-        target.damage(damageDealt);
-        
         if (target != this) {
-            addXp(damageDealt);
+            // Attacking target
+
+            // Determine if target evades attack
+            if (rand.nextInt(200) < target.evasion) {
+                System.out.println(target.username + " dodged " + username + "'s attack!");
+            } else {
+                System.out.println(username + " fireballed " + target.username + " for " + damageDealt + " damage!");
+                target.damage(damageDealt);
+                addXp(damageDealt);
+            }
         } else {
-            System.out.println(username + " was not awarded XP for hurting itself");
+            // Attacking self
+            target.damage(damageDealt);
+            System.out.println(username + " dealt " + damageDealt + " to itself!");
         }
     }
 }

@@ -8,6 +8,7 @@ import com.example.consoleprogram.characters.Monster;
 import com.example.consoleprogram.characters.Player;
 import com.example.consoleprogram.characters.RatMischief;
 import com.example.consoleprogram.characters.Spearman;
+import com.example.consoleprogram.characters.Wizard;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -237,6 +238,10 @@ public class MyProgram extends ConsoleProgram
             String username = "";
             while (username.length() == 0) {
                 username = readLine("What is your username? ").trim();
+                if (!Character.isUsernameAvailable(username)) {
+                    System.out.println("Username \"" + username + "\" is not available!");
+                    username = "";
+                }
             }
 
             Player newCharacter;
@@ -272,7 +277,7 @@ public class MyProgram extends ConsoleProgram
 
             int characterType = rand.nextInt(1) + 1;
             if (!randomize) {
-                int choice = readOption(Arrays.asList("Randomize Rest", "Dragon", "Rat Mischief"));
+                int choice = readOption(Arrays.asList("Randomize Rest", "Dragon", "Rat Mischief", "Wizard"));
                 if (choice == 1)
                     randomize = true;
                 else
@@ -286,6 +291,9 @@ public class MyProgram extends ConsoleProgram
                     break;
                 case 2:
                     newCharacter = new RatMischief(difficulty);
+                    break;
+                case 3:
+                    newCharacter = new Wizard(difficulty);
                     break;
                 default:
                     System.out.println("Invalid selection made!");

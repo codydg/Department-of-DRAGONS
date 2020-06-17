@@ -1,9 +1,12 @@
 package com.example.consoleprogram.characters;
 
+import java.util.HashSet;
 import java.util.Random;
 
 public abstract class Character
 {
+    static private HashSet<String> usedUsernames = new HashSet<>();
+
     protected Random rand = new Random();
     
     protected String username;
@@ -16,6 +19,7 @@ public abstract class Character
 
     Character(String username)
     {
+        usedUsernames.add(username);
         this.username = username;
     }
 
@@ -53,4 +57,8 @@ public abstract class Character
     }
 
     public abstract void attack(Character target);
+
+    public static boolean isUsernameAvailable(String username) {
+        return !usedUsernames.contains(username);
+    }
 }
